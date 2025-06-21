@@ -26,7 +26,7 @@ function CopyButton({ text }: { text: string }) {
 
 export default function LaunchPage() {
   return (
-    <div className="min-h-screen bg-white p-8">
+    <div className="min-h-screen bg-blue-50 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-8">
