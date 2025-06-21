@@ -14,8 +14,9 @@ export default function Home() {
             <div className="absolute -bottom-8 left-1/3 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '-4s' }}></div>
 
             <div className="relative">
-              <h1 className="text-4xl sm:text-5xl font-bold text-blue-600 mb-6 animate-float">
-                Welcome to the Future of APIs
+              <h1 className="text-4xl sm:text-5xl font-bold text-black mb-6 animate-float">
+                Welcome to the 
+                <span className="text-blue-600"> Future  <span className="text-black">of </span> APIs </span>
               </h1>
               <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto animate-float" style={{ animationDelay: '-1s' }}>
                 A Decentralized Pay-Per-Call API Protocol powered by Filecoin. Monetize your APIs. Pay only when you use them.
@@ -36,7 +37,8 @@ export default function Home() {
       {/* Features Grid */}
       <section className="py-16 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-blue-600 text-center mb-12">Why Build on Filecoin?</h2>
+          <h2 className="text-3xl font-bold text-black text-center mb-12">Why Build on 
+            <span className="text-blue-600"> Filecoin?</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
@@ -56,7 +58,7 @@ export default function Home() {
                 description: "The native storage layer for a decentralized internet."
               }
             ].map((feature, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200">
+              <div key={index} className="bg-blue-300 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200">
                 <h3 className="text-xl font-semibold text-black mb-3">{feature.title}</h3>
                 <p className="text-gray-700">{feature.description}</p>
               </div>
@@ -68,7 +70,7 @@ export default function Home() {
       {/* Key Features */}
       <section className="py-16 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-blue-600 text-center mb-12">Key Features</h2>
+          <h2 className="text-3xl font-bold text-black text-center mb-12">Key Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -96,7 +98,7 @@ export default function Home() {
                 description: "Easy to integrate into your frontend/backend"
               }
             ].map((feature, index) => (
-              <div key={index} className="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-gray-300">
+              <div key={index} className="bg-blue-300 p-6 rounded-xl shadow-md hover:shadow-xl  transition-all duration-300 border border-gray-200 hover:border-gray-300">
                 <h3 className="text-xl font-semibold text-black mb-3">{feature.title}</h3>
                 <p className="text-gray-700">{feature.description}</p>
               </div>
