@@ -54,7 +54,7 @@ export default function LaunchPage() {
           ].map((category) => (
             <button
               key={category}
-              className="px-3 py-1.5 text-sm rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+              className="px-3 py-1.5 text-sm rounded-full bg-white text-black hover:bg-gray-100 transition-colors"
             >
               {category}
             </button>
