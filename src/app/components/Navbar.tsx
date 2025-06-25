@@ -1,6 +1,8 @@
 'use client'
 import Link from 'next/link'
 
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 const Navbar = () => {
   return (
     <nav className="bg-blue-200 shadow-sm border-b border-gray-200">
@@ -18,7 +20,7 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-          
+          <ConnectButton />
           
           </div>
 
