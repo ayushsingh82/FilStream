@@ -1,6 +1,6 @@
 # 🎥 FilStream - Decentralized Video Streaming Platform
 
-FilStream is a revolutionary decentralized video streaming platform that empowers creators to monetize their content while leveraging Filecoin's powerful storage and CDN technologies. It combines **USDFC** for stable payments, **PDP** for verifiable decentralized storage, and **FilCDN** for instant global content delivery.
+FilStream is a revolutionary decentralized video streaming platform that empowers creators to monetize their content through advertising while leveraging Filecoin's powerful storage and CDN technologies. It combines **USDFC** for stable payments, **PDP** for verifiable decentralized storage, and **FilCDN** for instant global content delivery.
 
 ---
 
@@ -12,10 +12,10 @@ FilStream is a revolutionary decentralized video streaming platform that empower
 - **Decentralized Storage**: Automatic Filecoin PDP integration
 - **Instant CDN**: FilCDN URLs generated automatically
 
-### 💰 Monetization & Payments
-- **Creator Earnings**: Earn USDFC for every video view
-- **Pay-Per-View Model**: Viewers pay $20 USDFC/week for access
-- **Platform Revenue**: 5% platform fee on all transactions
+### 💰 Monetization & Advertising
+- **Creator Earnings**: Earn USDFC for every ad view on your content
+- **Advertiser Platform**: Businesses pay to run video ads
+- **No Viewer Fees**: Free content viewing for all users
 - **Earnings Withdrawal**: Instant USDFC withdrawals to wallet
 - **Revenue Analytics**: Real-time earnings tracking
 
@@ -37,47 +37,22 @@ FilStream is a revolutionary decentralized video streaming platform that empower
 
 ### 🎯 Creator Revenue Streams
 
-#### **1. Pay-Per-View Earnings**
+#### **1. Advertising Revenue Model**
 ```
-Viewer Payment: $20 USDFC/week
-Platform Fee: 5% ($1 USDFC)
-Creator Earnings: 95% ($19 USDFC)
+Advertiser Payment: $20 USDFC per week
+
 ```
 
 #### **2. Revenue Distribution**
-- **95%** → Content Creator
-- **5%** → Platform (FilStream)
-- **Storage Costs** → Covered by viewer payments
-- **CDN Costs** → Included in weekly fee
+- **100%** → Content Creator
+- **0%** → Platform (FilStream - No fees)
+- **Storage Costs** → Covered by advertiser payments
+- **CDN Costs** → Included in ad revenue
 
-#### **3. Earnings Calculation Example**
-```
-Video Views: 100 viewers
-Weekly Revenue: 100 × $19 = $1,900 USDFC
-Monthly Revenue: $1,900 × 4 = $7,600 USDFC
-Annual Revenue: $7,600 × 12 = $91,200 USDFC
-```
 
-### 📊 Monetization Features
 
-#### **Creator Dashboard**
-- Real-time earnings tracking
-- View count analytics
-- Revenue breakdown by video
-- Withdrawal history
-- Performance metrics
 
-#### **Payment Processing**
-- **Automatic Payouts**: Earnings sent directly to creator wallet
-- **Instant Withdrawals**: No waiting periods or minimum thresholds
-- **USDFC Stability**: USD-pegged stablecoin eliminates volatility
-- **Gas Optimization**: Batch transactions for cost efficiency
 
-#### **Revenue Optimization**
-- **Content Quality**: Higher engagement = more views
-- **Category Targeting**: Optimize for trending categories
-- **Thumbnail Optimization**: Increase click-through rates
-- **Description SEO**: Improve discoverability
 
 ---
 
@@ -112,9 +87,9 @@ FilCDN URL Creation
     ↓
 Smart Contract Registration
     ↓
-Payment Processing (USDFC)
+Ad Integration Setup
     ↓
-Content Available for Streaming
+Content Available for Free Viewing
 ```
 
 #### **2. Viewer Experience**
@@ -125,22 +100,24 @@ Browse Video Library
     ↓
 Select Video to Watch
     ↓
-Pay $20 USDFC/week
+Free Content Viewing
     ↓
-Instant FilCDN Streaming
+Ad Display (if applicable)
     ↓
-Creator Earns $19 USDFC
+Creator Earns from Ad Views
 ```
 
-#### **3. Revenue Flow**
+#### **3. Advertising Revenue Flow**
 ```
-Viewer Payment ($20 USDFC)
+Advertiser Pays for Ad Campaign
     ↓
 Smart Contract Processing
     ↓
-Platform Fee ($1 USDFC)
+Ad Display on Creator Content
     ↓
-Creator Payout ($19 USDFC)
+Ad View Tracking
+    ↓
+Creator Payout (100% of ad revenue)
     ↓
 Automatic Wallet Transfer
 ```
@@ -173,19 +150,25 @@ Automatic Wallet Transfer
 
 ### **Creator Costs**
 - **Upload Fee**: $0 (Free video uploads)
-- **Storage Cost**: Covered by viewer payments
-- **CDN Cost**: Included in platform fee
+- **Storage Cost**: Covered by advertiser payments
+- **CDN Cost**: Included in ad revenue
 - **Transaction Fees**: Minimal gas costs
 
 ### **Viewer Costs**
-- **Weekly Access**: $20 USDFC per video
-- **No Hidden Fees**: Transparent pricing
-- **Instant Access**: Pay once, watch anytime
-- **Creator Support**: 95% goes to content creators
+- **Content Access**: $0 (Completely free)
+- **No Hidden Fees**: Zero cost to viewers
+- **Instant Access**: Watch anytime without payment
+- **Ad-Free Option**: Premium subscription available
+
+### **Advertiser Costs**
+- **Ad Campaign**: $50 USDFC per 1,000 ad views
+- **Targeting Options**: Category and demographic targeting
+- **Performance Tracking**: Real-time ad view analytics
+- **Flexible Budgeting**: Set your own ad spend limits
 
 ### **Platform Revenue**
-- **Service Fee**: 5% of all transactions
-- **Sustainability**: Supports platform development
+- **Service Fee**: 0% (No platform fees)
+- **Sustainability**: Supported by advertiser payments
 - **Innovation Fund**: New feature development
 - **Community Rewards**: Creator incentive programs
 
@@ -197,53 +180,26 @@ Automatic Wallet Transfer
 1. **Connect Wallet**: Use MetaMask or WalletConnect
 2. **Register Account**: One-time blockchain registration
 3. **Upload Content**: Select video and add metadata
-4. **Set Pricing**: $20 USDFC/week (standard rate)
-5. **Start Earning**: Automatic revenue from views
+4. **Enable Ads**: Opt-in to advertising revenue
+5. **Start Earning**: Automatic revenue from ad views
 
 ### **For Viewers**
-1. **Connect Wallet**: Ensure USDFC balance
+1. **Connect Wallet**: No payment required
 2. **Browse Library**: Discover creator content
-3. **Make Payment**: $20 USDFC for weekly access
-4. **Enjoy Content**: Instant FilCDN streaming
-5. **Support Creators**: 95% of payment goes to creators
+3. **Watch Freely**: Enjoy content without any cost
+4. **Support Creators**: View ads to help creators earn
+5. **Premium Option**: Ad-free subscription available
+
+### **For Advertisers**
+1. **Connect Wallet**: Ensure USDFC balance
+2. **Create Campaign**: Set budget and targeting
+3. **Upload Ad**: Submit video advertisement
+4. **Launch Campaign**: Start reaching viewers
+5. **Track Performance**: Monitor ad view analytics
 
 ---
 
-## 📈 Growth & Expansion
 
-### **Phase 1: Core Platform**
-- ✅ Video upload and storage
-- ✅ USDFC payment processing
-- ✅ FilCDN integration
-- ✅ Creator earnings
-
-### **Phase 2: Enhanced Features**
-- 🔄 Live streaming capabilities
-- 🔄 NFT integration for exclusive content
-- 🔄 Creator marketplace
-- 🔄 Advanced analytics
-
-### **Phase 3: Ecosystem Expansion**
-- 📋 Multi-chain support
-- 📋 Creator DAO governance
-- 📋 DeFi integration
-- 📋 Mobile applications
-
----
-
-## 🔗 Smart Contract Addresses
-
-### **Base Sepolia Testnet**
-- **FilStream Contract**: `0x...` (Deploy after testing)
-- **USDFC Token**: `0x...` (USDFC contract address)
-- **PDP Provider**: `0x...` (Filecoin PDP contract)
-
-### **Mainnet (Future)**
-- **FilStream Contract**: TBD
-- **USDFC Token**: TBD
-- **PDP Provider**: TBD
-
----
 
 ## 📊 Performance Metrics
 
@@ -293,13 +249,6 @@ npx hardhat deploy --network base-sepolia
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-## 🆘 Support
-
-- **Documentation**: [docs.filstream.io](https://docs.filstream.io)
-- **Discord**: [Join our community](https://discord.gg/filstream)
-- **Twitter**: [@FilStream](https://twitter.com/FilStream)
-- **Email**: support@filstream.io
 
 ---
 
