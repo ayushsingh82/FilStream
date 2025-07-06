@@ -7,7 +7,7 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
- baseSepolia
+  filecoinCalibration
 } from 'wagmi/chains';
 import {
   QueryClientProvider,
@@ -17,7 +17,7 @@ import {
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [baseSepolia],
+  chains: [filecoinCalibration],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { 
-  DatabaseZap, 
-  ShieldCheck, 
-  CircleDollarSign, 
-  Orbit, 
-  Gauge, 
-  FileText, 
-  Store, 
+  Play, 
+  Shield, 
+  Globe, 
+  Zap, 
+  Users, 
+  FileVideo, 
+  Cloud, 
   Lock, 
   BrainCircuit, 
   Puzzle 
@@ -26,16 +26,16 @@ export default function Home() {
             <div className="absolute -bottom-8 left-1/3 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '-4s' }}></div>
 
             <div className="relative">
-              <h1 className="text-4xl sm:text-5xl font-bold text-black mb-6 animate-float">
-                Welcome to the
-                <span className="text-blue-600"> Future of APIs</span> 
+              <h1 className="text-4xl sm:text-5xl font-bold text-blue-900 mb-6 animate-float">
+                Welcome to FilStream
               </h1>
               <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto animate-float" style={{ animationDelay: '-1s' }}>
-                A Decentralized Pay-Per-Call API Protocol powered by Filecoin. Monetize your APIs. Pay only when you use them.
+                The future of decentralized video streaming. Powered by Filecoin's distributed storage network, 
+                FilStream delivers high-quality video content with unmatched reliability and censorship resistance.
               </p>
               <div className="flex gap-4 justify-center animate-float" style={{ animationDelay: '-2s' }}>
                 <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl animate-pulse-glow">
-                  Get Started
+                  Start Streaming
                 </button>
                 <button className="border border-gray-300 text-blue-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md">
                   Learn More
@@ -47,30 +47,30 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-24 bg-blue-50">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-blue-600 text-center mb-16">Why Build on Filecoin?</h2>
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-16">Why Choose FilStream?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: <DatabaseZap className="h-10 w-10 text-blue-600" />,
-                title: "Decentralized Storage",
-                description: "Leverage Filecoin's massive, decentralized storage network."
+                icon: <Play className="h-10 w-10 text-blue-600" />,
+                title: "Decentralized Streaming",
+                description: "Stream content from Filecoin's distributed network, ensuring 24/7 availability."
               },
               {
-                icon: <ShieldCheck className="h-10 w-10 text-blue-600" />,
-                title: "Verifiable Storage",
-                description: "Cryptographic proofs ensure your data is stored correctly."
+                icon: <Shield className="h-10 w-10 text-blue-600" />,
+                title: "Censorship Resistant",
+                description: "Your content stays accessible, protected by decentralized storage."
               },
               {
-                icon: <CircleDollarSign className="h-10 w-10 text-blue-600" />,
-                title: "Competitive Pricing",
-                description: "Storage is priced via an open market of providers."
+                icon: <Zap className="h-10 w-10 text-blue-600" />,
+                title: "Lightning Fast",
+                description: "Optimized CDN delivery ensures smooth streaming experience."
               },
               {
-                icon: <Orbit className="h-10 w-10 text-blue-600" />,
-                title: "Built for Web3",
-                description: "The native storage layer for a decentralized internet."
+                icon: <Globe className="h-10 w-10 text-blue-600" />,
+                title: "Global Access",
+                description: "Access content from anywhere in the world without restrictions."
               }
             ].map((feature, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-blue-600">
@@ -86,43 +86,43 @@ export default function Home() {
       {/* Key Features */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-blue-600 text-center mb-16">Key Features</h2>
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-16">Platform Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: <Gauge className="h-8 w-8 text-blue-500" />,
-                title: "Smart Metering",
-                description: "Track every API request and charge automatically"
+                icon: <FileVideo className="h-8 w-8 text-blue-500" />,
+                title: "Video Upload",
+                description: "Upload your videos securely to Filecoin's decentralized storage"
               },
               {
-                icon: <FileText className="h-8 w-8 text-blue-500" />,
-                title: "Immutable Billing",
-                description: "Usage logs stored on-chain for transparency"
+                icon: <Cloud className="h-8 w-8 text-blue-500" />,
+                title: "Smart Storage",
+                description: "Automatic replication and redundancy across the network"
               },
               {
-                icon: <Store className="h-8 w-8 text-blue-500" />,
-                title: "API Marketplace",
-                description: "Discover & integrate APIs instantly"
+                icon: <Users className="h-8 w-8 text-blue-500" />,
+                title: "Creator Tools",
+                description: "Monetize your content with built-in payment systems"
               },
               {
                 icon: <Lock className="h-8 w-8 text-blue-500" />,
-                title: "Token-Gated Access",
-                description: "Restrict premium endpoints via NFTs or Tokens"
+                title: "Content Protection",
+                description: "Advanced DRM and access control for your content"
               },
               {
                 icon: <BrainCircuit className="h-8 w-8 text-blue-500" />,
-                title: "AI/ML Ready",
-                description: "Deploy inference models & charge per inference"
+                title: "AI Recommendations",
+                description: "Smart content discovery powered by decentralized AI"
               },
               {
                 icon: <Puzzle className="h-8 w-8 text-blue-500" />,
-                title: "Plug & Play SDK",
-                description: "Easy to integrate into your frontend/backend"
+                title: "Easy Integration",
+                description: "Simple APIs and SDKs for developers"
               }
             ].map((feature, index) => (
-              <div key={index} className="group bg-gray-50 p-6 rounded-xl hover:bg-blue-600 hover:text-black transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
+              <div key={index} className="group bg-gray-50 p-6 rounded-xl hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1">
                 <div className="flex items-center space-x-4">
-                  <div className="bg-white p-3 rounded-full transition-all duration-300 group-hover:bg-white">
+                  <div className="bg-white p-3 rounded-full transition-all duration-300 group-hover:bg-blue-500">
                     {feature.icon}
                   </div>
                   <div>
@@ -136,17 +136,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-blue-900 text-center mb-16">How FilStream Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Upload Content",
+                description: "Upload your video content to our platform. We'll automatically store it on Filecoin's decentralized network using PDP (Provider Data Protocol)."
+              },
+              {
+                step: "02",
+                title: "Distributed Storage",
+                description: "Your content gets replicated across multiple Filecoin storage providers, ensuring maximum availability and redundancy."
+              },
+              {
+                step: "03",
+                title: "Global Streaming",
+                description: "Viewers can stream your content instantly from anywhere in the world via our optimized CDN network."
+              }
+            ].map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                  {step.step}
+                </div>
+                <h3 className="text-xl font-semibold text-blue-900 mb-4">{step.title}</h3>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-16 bg-blue-50">
+      <section className="py-16 bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-white rounded-2xl shadow-xl p-12 max-w-4xl mx-auto border border-gray-200">
-            <h2 className="text-3xl font-bold text-blue-900 mb-6">Ready to Get Started?</h2>
+            <h2 className="text-3xl font-bold text-blue-900 mb-6">Ready to Start Streaming?</h2>
             <p className="text-gray-700 mb-8 max-w-2xl mx-auto text-lg">
-              Join our developer program for early access, grants, and custom integration support.
+              Join thousands of creators and viewers on the decentralized streaming platform of the future.
             </p>
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl text-lg font-medium">
-              Join Developer Program
-            </button>
+            <div className="flex gap-4 justify-center">
+              <button className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl text-lg font-medium">
+                Start Streaming
+              </button>
+              <button className="border border-blue-600 text-blue-600 px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 text-lg font-medium">
+                Upload Content
+              </button>
+            </div>
           </div>
         </div>
       </section>
