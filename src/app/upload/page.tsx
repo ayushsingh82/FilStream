@@ -6,8 +6,7 @@ const UploadPage = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: '',
-    tags: ''
+    category: ''
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [isUploading, setIsUploading] = useState(false)
@@ -105,6 +104,7 @@ const UploadPage = () => {
                     Selected: {selectedFile.name}
                   </p>
                 )}
+                <p className="mt-4 text-sm font-medium text-blue-600">$20 USDFC/week</p>
               </div>
 
               {/* Form Fields */}
@@ -157,19 +157,6 @@ const UploadPage = () => {
                     <option value="lifestyle">Lifestyle</option>
                   </select>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tags
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.tags}
-                    onChange={(e) => setFormData({...formData, tags: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Enter tags separated by commas"
-                  />
-                </div>
               </div>
 
               <button
@@ -197,8 +184,8 @@ const UploadPage = () => {
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Pricing</h3>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-gray-600">Storage & CDN (2 weeks)</span>
-                  <span className="font-medium">$20.00</span>
+                  <span className="text-gray-600">Storage & CDN</span>
+                  <span className="font-medium">$20.00 USDFC / week</span>
                 </div>
                 <div className="flex items-center justify-between text-lg font-semibold text-blue-900">
                   <span>Total</span>
