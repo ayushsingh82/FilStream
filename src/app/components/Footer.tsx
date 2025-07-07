@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Twitter, Github } from 'lucide-react'; // Assuming you'll add lucide-react for icons
 
 const Footer = () => {
   return (

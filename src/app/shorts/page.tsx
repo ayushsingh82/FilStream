@@ -5,21 +5,15 @@ import { FaShareAlt, FaThumbsUp, FaVolumeUp, FaVolumeMute } from "react-icons/fa
 import { motion } from "framer-motion"
 import videolinks from './videolinks'
 
-// Try to import throttle from lodash, fallback to simple implementation
-let throttle: (func: (...args: unknown[]) => void, delay: number) => (...args: unknown[]) => void
-try {
-  throttle = require('lodash/throttle')
-} catch {
-  // Simple throttle fallback function
-  throttle = (func: (...args: unknown[]) => void, delay: number) => {
-    let timeoutId: NodeJS.Timeout | null = null
-    return (...args: unknown[]) => {
-      if (timeoutId) return
-      timeoutId = setTimeout(() => {
-        func(...args)
-        timeoutId = null
-      }, delay)
-    }
+// Simple throttle implementation
+const throttle = (func: (...args: unknown[]) => void, delay: number) => {
+  let timeoutId: NodeJS.Timeout | null = null
+  return (...args: unknown[]) => {
+    if (timeoutId) return
+    timeoutId = setTimeout(() => {
+      func(...args)
+      timeoutId = null
+    }, delay)
   }
 }
 

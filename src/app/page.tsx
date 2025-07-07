@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { 
   Play, 
   Shield, 
@@ -30,7 +29,7 @@ export default function Home() {
                 Welcome to FilStream
               </h1>
               <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-float" style={{ animationDelay: '-1s' }}>
-                The future of decentralized video streaming. Powered by Filecoin's distributed storage network, 
+                The future of decentralized video streaming. Powered by Filecoin&apos;s distributed storage network, 
                 FilStream delivers high-quality video content with unmatched reliability and censorship resistance.
               </p>
               <div className="flex gap-4 justify-center animate-float" style={{ animationDelay: '-2s' }}>

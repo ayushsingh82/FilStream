@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import { Wallet } from 'lucide-react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const Navbar = () => {
