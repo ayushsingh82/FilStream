@@ -189,16 +189,39 @@ const ShortsPage = () => {
   const [likedShorts, setLikedShorts] = useState<{[key: number]: boolean}>({})
   const loadingRef = useRef(false)
 
-  // Categories for filtering
-  const categories = ['All', 'Gaming', 'Cooking', 'Tech', 'Nature', 'Music', 'Fitness', 'Travel']
+  // Categories matching the upload page
+  const categories = ['All', 'Entertainment', 'Education', 'Gaming', 'Music', 'Sports', 'Technology', 'Lifestyle']
 
   // Filter shorts based on selected category
   const filteredShorts = useMemo(() => {
-    return selectedCategory === 'All' 
-      ? shortsData 
-      : shortsData.filter(short => short.tags.some((tag: string) => 
-          tag.toLowerCase().includes(selectedCategory.toLowerCase())
-        ))
+    if (selectedCategory === 'All') {
+      return shortsData
+    }
+    
+    return shortsData.filter(short => {
+      const tagString = short.tags.join(' ').toLowerCase()
+      const categoryLower = selectedCategory.toLowerCase()
+      
+      // Special handling for different categories based on current video tags
+      switch (selectedCategory) {
+        case 'Entertainment':
+          return tagString.includes('zale') || tagString.includes('funny') || tagString.includes('meme')
+        case 'Education':
+          return tagString.includes('education') || tagString.includes('learn')
+        case 'Gaming':
+          return tagString.includes('dice') || tagString.includes('game') || tagString.includes('gaming')
+        case 'Music':
+          return tagString.includes('music') || tagString.includes('song') || tagString.includes('audio')
+        case 'Sports':
+          return tagString.includes('sport') || tagString.includes('fitness') || tagString.includes('workout')
+        case 'Technology':
+          return tagString.includes('tech') || tagString.includes('technology') || tagString.includes('gadget')
+        case 'Lifestyle':
+          return tagString.includes('lifestyle') || tagString.includes('life') || tagString.includes('daily')
+        default:
+          return tagString.includes(categoryLower)
+      }
+    })
   }, [selectedCategory, shortsData])
 
   // Throttled scroll handler
@@ -284,20 +307,29 @@ const ShortsPage = () => {
 
         {/* Video Container */}
         <div className="relative w-full min-h-screen p-0 m-0 overflow-y-auto">
-          {filteredShorts.slice(0, loadedShorts).map((short, index) => (
-            <div key={short.id} className="relative">
-              <Short
-                short={short}
-                isPlaying={currentShortIndex === index}
-                isLiked={!!likedShorts[short.id]}
-                isMuted={isMuted}
-                onLike={() => handleLike(short.id)}
-                onShare={() => handleShare(short.id)}
-                onComment={() => handleComment(short.id)}
-                toggleMute={toggleMute}
-              />
+          {filteredShorts.length === 0 ? (
+            <div className="flex items-center justify-center h-screen">
+              <div className="text-center text-white">
+                <div className="text-2xl mb-2">No videos found</div>
+                <div className="text-gray-400">Try selecting a different category</div>
+              </div>
             </div>
-          ))}
+          ) : (
+            filteredShorts.slice(0, loadedShorts).map((short, index) => (
+              <div key={short.id} className="relative">
+                <Short
+                  short={short}
+                  isPlaying={currentShortIndex === index}
+                  isLiked={!!likedShorts[short.id]}
+                  isMuted={isMuted}
+                  onLike={() => handleLike(short.id)}
+                  onShare={() => handleShare(short.id)}
+                  onComment={() => handleComment(short.id)}
+                  toggleMute={toggleMute}
+                />
+              </div>
+            ))
+          )}
 
           {loadingRef.current && (
             <div className="fixed z-50 flex items-center justify-center gap-2 font-bold text-center text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
