@@ -1,117 +1,51 @@
 'use client'
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react'
 import { Play, Heart, MessageCircle, Share, User, Filter, Pause } from 'lucide-react'
-import throttle from 'lodash/throttle'
+import { FaShareAlt, FaThumbsUp, FaVolumeUp, FaVolumeMute } from "react-icons/fa"
+import { motion } from "framer-motion"
+import videolinks from './videolinks'
 
-// Mock data for shorts with working video URLs and categories
-const shortsData = [
-  {
-    id: 1,
-    title: "Amazing Sunset Views",
-    creator: "NatureLover",
-    category: "Nature",
-    views: "1.2K",
-    likes: 234,
-    comments: 45,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=1"
-  },
-  {
-    id: 2,
-    title: "Cooking Masterclass",
-    creator: "ChefPro",
-    category: "Cooking",
-    views: "3.4K",
-    likes: 567,
-    comments: 89,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=2"
-  },
-  {
-    id: 3,
-    title: "Tech Review: Latest Gadgets",
-    creator: "TechGuru",
-    category: "Tech",
-    views: "5.6K",
-    likes: 789,
-    comments: 123,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=3"
-  },
-  {
-    id: 4,
-    title: "Epic Gaming Moments",
-    creator: "GameMaster",
-    category: "Gaming",
-    views: "8.9K",
-    likes: 1200,
-    comments: 234,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=4"
-  },
-  {
-    id: 5,
-    title: "Workout Routine",
-    creator: "FitLife",
-    category: "Fitness",
-    views: "2.1K",
-    likes: 456,
-    comments: 67,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=5"
-  },
-  {
-    id: 6,
-    title: "Travel Vlog: Paris",
-    creator: "Wanderlust",
-    category: "Travel",
-    views: "4.3K",
-    likes: 678,
-    comments: 98,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=6"
-  },
-  {
-    id: 7,
-    title: "Guitar Solo Masterpiece",
-    creator: "MusicPro",
-    category: "Music",
-    views: "6.7K",
-    likes: 890,
-    comments: 156,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=7"
-  },
-  {
-    id: 8,
-    title: "Mountain Climbing Adventure",
-    creator: "AdventureSeeker",
-    category: "Nature",
-    views: "3.2K",
-    likes: 445,
-    comments: 78,
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMobsters.mp4",
-    thumbnail: "https://picsum.photos/400/600?random=8"
+// Try to import throttle from lodash, fallback to simple implementation
+let throttle: any
+try {
+  throttle = require('lodash/throttle')
+} catch {
+  // Simple throttle fallback function
+  throttle = (func: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout | null = null
+    return (...args: any[]) => {
+      if (timeoutId) return
+      timeoutId = setTimeout(() => {
+        func(...args)
+        timeoutId = null
+      }, delay)
+    }
   }
-]
+}
 
 // Memoized Short component to prevent unnecessary re-renders
 const Short = React.memo(({
   short,
   isPlaying,
   isLiked,
+  isMuted,
   onLike,
   onShare,
-  onComment
+  onComment,
+  toggleMute
 }: {
   short: any
   isPlaying: boolean
   isLiked: boolean
+  isMuted: boolean
   onLike: () => void
   onShare: () => void
   onComment: () => void
+  toggleMute: () => void
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [animateThumb, setAnimateThumb] = useState(false)
+  const [animateSpeaker, setAnimateSpeaker] = useState(false)
 
   // Video playback control
   useEffect(() => {
@@ -133,90 +67,112 @@ const Short = React.memo(({
     playVideo()
   }, [isPlaying])
 
+  // Animation handlers
+  const triggerAnimation = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setter(true)
+    setTimeout(() => setter(false), 1000)
+  }
+
+  const handleLikeClick = () => {
+    onLike()
+    triggerAnimation(setAnimateThumb)
+  }
+
+  const handleMuteClick = () => {
+    toggleMute()
+    triggerAnimation(setAnimateSpeaker)
+  }
+
+  // Memoized buttons to prevent unnecessary re-renders
+  const ControlButtons = useMemo(() => (
+    <div className="absolute z-10 flex items-center justify-center gap-2 bottom-5 left-5">
+      <motion.button
+        onClick={handleMuteClick}
+        className="px-4 py-2 text-base text-white transition-colors duration-300 rounded-md bg-black/50 hover:bg-black/70"
+        whileTap={{ scale: 0.95 }}
+      >
+        {isMuted ? "Unmute" : "Mute"}
+      </motion.button>
+
+      <motion.button
+        onClick={handleLikeClick}
+        className={`text-base px-4 py-2 rounded-md transition-colors duration-300 ${
+          isLiked ? "bg-blue-500 text-white" : "bg-black/50 text-white hover:bg-black/70"
+        }`}
+        whileTap={{ scale: 0.95 }}
+      >
+        <FaThumbsUp />
+      </motion.button>
+
+      <motion.button
+        onClick={onShare}
+        className="px-4 py-2 text-base text-white transition-colors duration-300 rounded-md bg-black/50 hover:bg-black/70"
+        whileTap={{ scale: 0.95 }}
+      >
+        <FaShareAlt />
+      </motion.button>
+    </div>
+  ), [isMuted, isLiked])
+
   return (
-    <div className="relative h-screen bg-black">
-      {/* Video Element */}
+    <div className="box-border relative flex items-center justify-center w-full h-screen p-4 bg-black border-4 border-white shadow-lg">
       <video
         ref={videoRef}
-        className="w-full h-full object-cover"
-        poster={short.thumbnail}
+        src={short.src}
+        className="object-contain w-full h-full transition-opacity duration-300 ease-in-out rounded-lg cursor-pointer"
         loop
-        muted
+        muted={isMuted}
         playsInline
-        preload="metadata"
-      >
-        <source src={short.videoUrl} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-      
-      {/* Category Badge */}
-      <div className="absolute top-4 left-4 z-10">
-        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-          {short.category}
-        </span>
-      </div>
-      
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-        {/* Creator Info */}
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-            <User className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <h3 className="text-white font-semibold">{short.creator}</h3>
-            <p className="text-gray-300 text-sm">{short.views} views</p>
-          </div>
-        </div>
-        
-        {/* Title */}
-        <h2 className="text-white text-lg font-semibold mb-4">{short.title}</h2>
-        
-        {/* Action Buttons */}
-        <div className="flex items-center space-x-6">
-          <button 
-            onClick={onLike}
-            className="flex flex-col items-center space-y-1"
-          >
-            <Heart 
-              className={`h-6 w-6 ${isLiked ? 'text-red-500 fill-current' : 'text-white'}`} 
-            />
-            <span className="text-white text-sm">{short.likes}</span>
-          </button>
-          <button 
-            onClick={onComment}
-            className="flex flex-col items-center space-y-1"
-          >
-            <MessageCircle className="h-6 w-6 text-white" />
-            <span className="text-white text-sm">{short.comments}</span>
-          </button>
-          <button 
-            onClick={onShare}
-            className="flex flex-col items-center space-y-1"
-          >
-            <Share className="h-6 w-6 text-white" />
-            <span className="text-white text-sm">Share</span>
-          </button>
-        </div>
-      </div>
-      
-      {/* Play/Pause Button */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="bg-white bg-opacity-20 rounded-full p-4 backdrop-blur-sm">
-          {isPlaying ? (
-            <Pause className="h-8 w-8 text-white" />
-          ) : (
-            <Play className="h-8 w-8 text-white ml-1" />
-          )}
-        </div>
-      </div>
+        onClick={handleMuteClick}
+      />
 
-      {/* Video Progress Indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-600">
-        <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: '0%' }}></div>
+      {/* Animation overlays */}
+      {animateThumb && (
+        <motion.div
+          className="absolute z-20"
+          animate={{ scale: [1, 1.5, 2], opacity: [0, 1, 0] }}
+          transition={{ duration: 1.5 }}
+        >
+          <FaThumbsUp className="text-6xl text-sky-500" />
+        </motion.div>
+      )}
+
+      {animateSpeaker && (
+        <motion.div
+          className="absolute z-20"
+          animate={{ scale: [1, 1.5, 2], opacity: [0, 1, 0] }}
+          transition={{ duration: 1.5 }}
+        >
+          {isMuted ? (
+            <FaVolumeMute className="text-6xl text-sky-500" />
+          ) : (
+            <FaVolumeUp className="text-6xl text-sky-500" />
+          )}
+        </motion.div>
+      )}
+
+      {ControlButtons}
+
+      {/* Video info */}
+      <motion.div
+        className="absolute px-4 py-2 text-base text-white rounded-md top-10 left-5 bg-black/70"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        🤳 FilStream id: {short.id}
+      </motion.div>
+
+      {/* Tags */}
+      <div className="absolute left-0 flex flex-wrap justify-center w-full gap-2 px-4 py-2 text-sm text-white rounded-md bottom-20 bg-black/70">
+        {short.tags.map((tag: string, index: number) => (
+          <span
+            key={`${tag}-${index}`}
+            className="text-blue-400 transition duration-200 cursor-pointer hover:text-blue-500 hover:underline"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
   )
@@ -225,9 +181,11 @@ const Short = React.memo(({
 Short.displayName = 'Short'
 
 const ShortsPage = () => {
+  const [shortsData, setShortsData] = useState(videolinks)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [currentShortIndex, setCurrentShortIndex] = useState(0)
   const [loadedShorts, setLoadedShorts] = useState(3)
+  const [isMuted, setIsMuted] = useState(true)
   const [likedShorts, setLikedShorts] = useState<{[key: number]: boolean}>({})
   const loadingRef = useRef(false)
 
@@ -238,8 +196,10 @@ const ShortsPage = () => {
   const filteredShorts = useMemo(() => {
     return selectedCategory === 'All' 
       ? shortsData 
-      : shortsData.filter(short => short.category === selectedCategory)
-  }, [selectedCategory])
+      : shortsData.filter(short => short.tags.some((tag: string) => 
+          tag.toLowerCase().includes(selectedCategory.toLowerCase())
+        ))
+  }, [selectedCategory, shortsData])
 
   // Throttled scroll handler
   const handleScroll = useMemo(() => throttle(() => {
@@ -270,6 +230,8 @@ const ShortsPage = () => {
     setLikedShorts({})
   }, [selectedCategory])
 
+  const toggleMute = useCallback(() => setIsMuted(prev => !prev), [])
+
   const handleLike = useCallback((id: number) => {
     setLikedShorts(prev => ({ ...prev, [id]: !prev[id] }))
   }, [])
@@ -295,13 +257,13 @@ const ShortsPage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white pb-20">
+    <div className="min-h-screen bg-black pb-20">
       <div className="max-w-md mx-auto">
         {/* Category Filter */}
-        <div className="bg-white border-b border-gray-200 p-4 sticky top-0 z-20">
+        <div className="bg-black border-b border-gray-800 p-4 sticky top-0 z-20">
           <div className="flex items-center space-x-2 mb-3">
-            <Filter className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-800">Categories</h2>
+            <Filter className="h-5 w-5 text-gray-300" />
+            <h2 className="text-lg font-semibold text-white">Categories</h2>
           </div>
           <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((category) => (
@@ -311,7 +273,7 @@ const ShortsPage = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === category
                     ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                 }`}
               >
                 {category}
@@ -328,9 +290,11 @@ const ShortsPage = () => {
                 short={short}
                 isPlaying={currentShortIndex === index}
                 isLiked={!!likedShorts[short.id]}
+                isMuted={isMuted}
                 onLike={() => handleLike(short.id)}
                 onShare={() => handleShare(short.id)}
                 onComment={() => handleComment(short.id)}
+                toggleMute={toggleMute}
               />
             </div>
           ))}
