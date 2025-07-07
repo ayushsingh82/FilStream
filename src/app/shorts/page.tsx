@@ -1,19 +1,19 @@
 'use client'
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react'
-import { Play, Heart, MessageCircle, Share, User, Filter, Pause } from 'lucide-react'
+import { Filter } from 'lucide-react'
 import { FaShareAlt, FaThumbsUp, FaVolumeUp, FaVolumeMute } from "react-icons/fa"
 import { motion } from "framer-motion"
 import videolinks from './videolinks'
 
 // Try to import throttle from lodash, fallback to simple implementation
-let throttle: any
+let throttle: (func: (...args: unknown[]) => void, delay: number) => (...args: unknown[]) => void
 try {
   throttle = require('lodash/throttle')
 } catch {
   // Simple throttle fallback function
-  throttle = (func: Function, delay: number) => {
+  throttle = (func: (...args: unknown[]) => void, delay: number) => {
     let timeoutId: NodeJS.Timeout | null = null
-    return (...args: any[]) => {
+    return (...args: unknown[]) => {
       if (timeoutId) return
       timeoutId = setTimeout(() => {
         func(...args)
@@ -21,6 +21,12 @@ try {
       }, delay)
     }
   }
+}
+
+interface Short {
+  id: number
+  src: string
+  tags: string[]
 }
 
 // Memoized Short component to prevent unnecessary re-renders
@@ -31,16 +37,14 @@ const Short = React.memo(({
   isMuted,
   onLike,
   onShare,
-  onComment,
   toggleMute
 }: {
-  short: any
+  short: Short
   isPlaying: boolean
   isLiked: boolean
   isMuted: boolean
   onLike: () => void
   onShare: () => void
-  onComment: () => void
   toggleMute: () => void
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -73,15 +77,15 @@ const Short = React.memo(({
     setTimeout(() => setter(false), 1000)
   }
 
-  const handleLikeClick = () => {
+  const handleLikeClick = useCallback(() => {
     onLike()
     triggerAnimation(setAnimateThumb)
-  }
+  }, [onLike])
 
-  const handleMuteClick = () => {
+  const handleMuteClick = useCallback(() => {
     toggleMute()
     triggerAnimation(setAnimateSpeaker)
-  }
+  }, [toggleMute])
 
   // Memoized buttons to prevent unnecessary re-renders
   const ControlButtons = useMemo(() => (
@@ -112,7 +116,7 @@ const Short = React.memo(({
         <FaShareAlt />
       </motion.button>
     </div>
-  ), [isMuted, isLiked])
+  ), [isMuted, isLiked, handleLikeClick, handleMuteClick, onShare])
 
   return (
     <div className="box-border relative flex items-center justify-center w-full h-screen p-4 bg-black border-4 border-white shadow-lg">
@@ -181,7 +185,7 @@ const Short = React.memo(({
 Short.displayName = 'Short'
 
 const ShortsPage = () => {
-  const [shortsData, setShortsData] = useState(videolinks)
+  const [shortsData] = useState(videolinks)
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [currentShortIndex, setCurrentShortIndex] = useState(0)
   const [loadedShorts, setLoadedShorts] = useState(3)
@@ -200,7 +204,6 @@ const ShortsPage = () => {
     
     return shortsData.filter(short => {
       const tagString = short.tags.join(' ').toLowerCase()
-      const categoryLower = selectedCategory.toLowerCase()
       
       // Special handling for different categories based on current video tags
       switch (selectedCategory) {
@@ -219,14 +222,14 @@ const ShortsPage = () => {
         case 'Lifestyle':
           return tagString.includes('lifestyle') || tagString.includes('life') || tagString.includes('daily')
         default:
-          return tagString.includes(categoryLower)
+          return tagString.includes(selectedCategory.toLowerCase())
       }
     })
   }, [selectedCategory, shortsData])
 
   // Throttled scroll handler
   const handleScroll = useMemo(() => throttle(() => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement
+    const { scrollTop, scrollHeight } = document.documentElement
     const { innerHeight } = window
 
     const nextShortIndex = Math.floor((scrollTop + innerHeight / 2) / innerHeight)
@@ -274,11 +277,6 @@ const ShortsPage = () => {
     }
   }, [])
 
-  const handleComment = useCallback((id: number) => {
-    // Handle comment functionality
-    console.log('Comment on short:', id)
-  }, [])
-
   return (
     <div className="min-h-screen bg-black pb-20">
       <div className="max-w-md mx-auto">
@@ -324,7 +322,6 @@ const ShortsPage = () => {
                   isMuted={isMuted}
                   onLike={() => handleLike(short.id)}
                   onShare={() => handleShare(short.id)}
-                  onComment={() => handleComment(short.id)}
                   toggleMute={toggleMute}
                 />
               </div>

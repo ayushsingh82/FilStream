@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { Upload, FileVideo, DollarSign, Calendar, CheckCircle } from 'lucide-react'
+import { Upload, FileVideo, DollarSign, CheckCircle } from 'lucide-react'
 
 const UploadPage = () => {
   const [formData, setFormData] = useState({
@@ -218,7 +218,7 @@ const UploadPage = () => {
               <div className="bg-gray-800 border border-gray-700 rounded-lg p-4">
                 <p className="text-sm text-gray-300">
                   Your video will be available for streaming in a few minutes. 
-                  You'll receive a notification once it's ready.
+                  You&apos;ll receive a notification once it&apos;s ready.
                 </p>
               </div>
               <button
