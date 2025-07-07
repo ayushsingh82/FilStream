@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Filecoin",
-  description: "Filecoin - Decentralized Storage Network",
+  title: "FilStream",
+  description: "FilStream - Decentralized Video Streaming Platform",
 };
 
 export default function RootLayout({
@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-black text-white`}
       >
         <Providers>
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow bg-black">{children}</main>
           <Footer />
         </Providers>
       </body>
